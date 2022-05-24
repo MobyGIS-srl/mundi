@@ -29,6 +29,7 @@ import DownloadOptionsModel from 'eoxc/src/download/models/DownloadOptionsModel'
 import DownloadSelectionView from 'eoxc/src/download/views/DownloadSelectionView';
 import DownloadOptionsModalView from 'eoxc/src/download/views/DownloadOptionsModalView';
 import FullResolutionDownloadOptionsModalView from 'eoxc/src/download/views/FullResolutionDownloadOptionsModalView';
+import ReportDownloadOptionsModalView from 'eoxc/src/download/views/ReportDownloadOptionsModalView'
 
 import { sendProcessingRequest } from 'eoxc/src/processing';
 
@@ -353,6 +354,19 @@ window.Application = Marionette.Application.extend({
     layersCollection.on('download-full-resolution', (layerModel) => {
       const searchModel = searchCollection.find(model => model.get('layerModel') === layerModel);
       layout.showChildView('modals', new FullResolutionDownloadOptionsModalView({
+        layerModel,
+        mapModel,
+        filtersModel: searchModel ? searchModel.get('filtersModel') : null,
+        model: new DownloadOptionsModel({
+          availableDownloadFormats: settings.downloadFormats,
+          availableProjections: settings.downloadProjections,
+        }),
+      }));
+    });
+
+    layersCollection.on('download-report', (layerModel) => {
+      const searchModel = searchCollection.find(model => model.get('layerModel') === layerModel);
+      layout.showChildView('modals', new ReportDownloadOptionsModalView({
         layerModel,
         mapModel,
         filtersModel: searchModel ? searchModel.get('filtersModel') : null,
