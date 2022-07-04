@@ -637,6 +637,11 @@
                           "description": "If set to true, displays an extra download icon in layer list, triggering full resolution download panel. Can be used when search results panel is not used in the app.",
                           "type": "boolean",
                           "default": false
+                        },
+                        "reportDownloadIcon": {
+                          "description": "If set to true, displays a report download icon in layer list, triggering report download panel.",
+                          "type": "boolean",
+                          "default": false
                         }
                     },
                     "required": ["id", "protocol", "format"],
